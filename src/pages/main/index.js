@@ -2,19 +2,24 @@ import styled from "styled-components";
 import SignInForm from "./components/Signin";
 import SignUpForm from "./components/Signup";
 import { flexCenter } from "../../styles/common";
+import { useState } from "react";
 const MainPage = () => {
-  let isFormLogin = true;
+  const [isFormLogin, setIsFormLogin] = useState(true);
 
   const onClickFormHeader = (e) => {
     const { innerText } = e.target;
-    isFormLogin = innerText === "LOGIN" ? true : false;
+    innerText === "LOGIN" ? setIsFormLogin(true) : setIsFormLogin(false);
   };
 
   return (
     <S.Container>
       <S.Header>
-        <S.LoginHeader onClick={onClickFormHeader}>LOGIN</S.LoginHeader>
-        <S.SignUpHeader onClick={onClickFormHeader}>SIGN</S.SignUpHeader>
+        <S.LoginHeader isFormLogin={isFormLogin} onClick={onClickFormHeader}>
+          LOGIN
+        </S.LoginHeader>
+        <S.SignUpHeader isFormLogin={isFormLogin} onClick={onClickFormHeader}>
+          SIGN
+        </S.SignUpHeader>
       </S.Header>
       {isFormLogin ? <SignInForm /> : <SignUpForm />}
     </S.Container>
