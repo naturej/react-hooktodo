@@ -2,6 +2,7 @@ import BasicButton from "../../../components/Button/Button";
 import useInputs from "../../../hooks/use-inputs";
 import * as S from "./style";
 
+// TODO: email, password, passwordConfirm 유효성 검사 추가
 const SignUpForm = () => {
   const [{ email, password, passwordConfirm }, onChangeForm] = useInputs({
     email: "",
