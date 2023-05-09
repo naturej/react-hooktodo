@@ -13,6 +13,9 @@ export const PALETTE = {
   error: "#D21312",
   gray: {
     100: "#e9e9e9",
+    200: "#d1d1d1",
+    300: "#bababa",
+    400: "#a3a3a3"
   },
 };
 
