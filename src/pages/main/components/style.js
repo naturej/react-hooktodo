@@ -18,7 +18,8 @@ export const InputBox = styled.div`
 
   input {
     width: 100%;
-    border: 1px solid #999;
+    border: 1px solid
+      ${({ theme, errors }) => (errors ? theme.PALETTE.error : `#999`)};
     border-radius: 4px;
     height: 100%;
     text-align: center;
@@ -33,4 +34,16 @@ export const InputBox = styled.div`
     z-index: 1;
     padding: 0 4px;
   }
+`;
+
+export const FailMessage = styled.div`
+  margin: -10px 0 30px;
+  color: ${({ theme }) => theme.PALETTE.error};
+  font-size: ${({ theme }) => theme.FONT_SIZE.small};
+`;
+
+export const SuccessMessage = styled.div`
+  margin: -10px 0 30px;
+  color: ${({ theme }) => theme.PALETTE.primary[300]};
+  font-size: ${({ theme }) => theme.FONT_SIZE.small};
 `;

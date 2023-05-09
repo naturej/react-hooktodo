@@ -54,17 +54,16 @@ const Button = styled.button`
   ${({ variant }) => variantCSS[variant]}
   ${({ shape }) => shapeCSS[shape]}
   ${({ size }) => sizeCSS[size]}
-  cursor: pointer;
+  cursor : ${({ cursor }) => cursor};
   border: none;
   font-size: ${({ theme }) => theme.FONT_SIZE.medium};
   :hover {
     opacity: 0.7;
   }
   :disabled {
-    background-color: ${({theme}) => theme.PALETTE.gray[200]};
-    cursor: default;
+    background-color: ${({ theme }) => theme.PALETTE.gray[200]};
     :hover {
-      opacity:1;
+      opacity: 1;
     }
   }
 `;
