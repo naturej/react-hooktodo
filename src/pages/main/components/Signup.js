@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import BasicButton from "../../../components/Button/Button";
 import useInputs from "../../../hooks/use-inputs";
 import ErrorMessage from "./error-message";
@@ -5,11 +6,16 @@ import * as S from "./style";
 
 // TODO: email, password, passwordConfirm 유효성 검사 추가
 const SignUpForm = () => {
-  const [{ email, password, passwordConfirm }, onChangeForm, error] = useInputs({
+  const [{ email, password, passwordConfirm }, onChangeForm, error, success] = useInputs({
     email: "",
     password: "",
     passwordConfirm: "",
   });
+  const [isValid, setIsValid] = useState(false);
+
+  useEffect(()=> {
+    success.email && success.password && success.passwordConfirm ? setIsValid(true) : setIsValid(false)
+  }, [success])
 
   const onSubmitSignup = (e) => {
     e.preventDefault();
@@ -33,7 +39,7 @@ const SignUpForm = () => {
         <input type="password" name="passwordConfirm" onChange={onChangeForm} />
       </S.InputBox>
       { error.passwordConfirm && <ErrorMessage message={error.passwordConfirm} />}
-      <BasicButton size={"full"} shape={"default"} variant={"primary"} disabled={true}>
+      <BasicButton size={"full"} shape={"default"} variant={"primary"} disabled={!isValid}>
         회원가입
       </BasicButton>
     </S.Form>
