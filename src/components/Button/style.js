@@ -60,6 +60,13 @@ const Button = styled.button`
   :hover {
     opacity: 0.7;
   }
+  :disabled {
+    background-color: ${({theme}) => theme.PALETTE.gray[200]};
+    cursor: default;
+    :hover {
+      opacity:1;
+    }
+  }
 `;
 
 export default Button;
