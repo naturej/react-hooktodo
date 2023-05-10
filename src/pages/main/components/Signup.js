@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import BasicButton from "../../../components/Button/Button";
 import useInputs from "../../../hooks/use-inputs";
 import * as S from "./style";
+import { toast } from "react-toastify";
+import { toastMessage } from "../../../components/Toast/toast-message";
 
 const SignUpForm = () => {
   const [
@@ -17,6 +19,11 @@ const SignUpForm = () => {
   const [isValid, setIsValid] = useState(false);
   const [cursor, setCursor] = useState("not-allowed");
 
+  const toastOption = {
+    autoClose: 2000,
+    theme: "colored",
+  };
+
   useEffect(() => {
     if (successes.email && successes.password && successes.passwordConfirm) {
       setIsValid(true);
@@ -27,34 +34,44 @@ const SignUpForm = () => {
     }
   }, [successes]);
 
-  const onSubmitSignup = (e) => {
+  const onSubmitSignup = async (e) => {
     e.preventDefault();
     setIsValid(false);
     setCursor("wait");
-    signUpRequest()
-      .then((message) => {
-        alert(message);
-      })
-      .catch((error) => {
-        alert(error.message);
-      })
-      .finally(() => {
-        setIsValid(true);
-        setCursor("pointer");
+
+    try {
+      await toast.promise(signUpRequest, {
+        pending: {
+          render() {
+            return "처리 중 ...";
+          },
+          ...toastOption,
+        },
+        success: {
+          render() {
+            return "회원가입 성공!";
+          },
+          icon: "🥳",
+          ...toastOption,
+        },
+        error: {
+          render() {
+            return "회원가입 실패. 잠시 후 다시 시도해 주세요.";
+          },
+          icon: "😢",
+          ...toastOption,
+        },
       });
-    console.log(email, password, passwordConfirm);
+      setIsValid(true);
+      setCursor("pointer");
+    } catch (error) {
+      toastMessage(error, toast.error);
+    }
   };
 
   // 회원가입 요청(Back-end 통신)을 가정
   const signUpRequest = () => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(`${email}님 회원가입을 축하드립니다.`);
-        // reject(
-        //   new Error(`회원가입에 실패했습니다. 잠시 후 다시 시도해 주세요.`)
-        // );
-      }, 1000);
-    });
+    return new Promise((resolve) => setTimeout(resolve, 2000));
   };
 
   return (
