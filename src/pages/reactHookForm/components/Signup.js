@@ -26,31 +26,36 @@ const SignUpForm = () => {
     theme: "colored",
   };
 
-  const onSubmitSignup = (data) => {
+  const onSubmitSignup = async (data) => {
     if (data.password === "")
       return toastMessage("비밀번호를 입력해 주세요.", toast.error);
-    return toast.promise(signUpRequest, {
-      pending: {
-        render() {
-          return "처리 중 ...";
+    try {
+      await toast.promise(signUpRequest, {
+        pending: {
+          render() {
+            return "처리 중 ...";
+          },
+          ...toastOption,
         },
-        ...toastOption,
-      },
-      success: {
-        render() {
-          return "회원가입 성공!";
+        success: {
+          render() {
+            return "회원가입 성공!";
+          },
+          icon: "🥳",
+          ...toastOption,
         },
-        icon: "🥳",
-        ...toastOption,
-      },
-      error: {
-        render() {
-          return "회원가입 실패. 잠시 후 다시 시도해 주세요.";
+        error: {
+          render() {
+            return "회원가입 실패. 잠시 후 다시 시도해 주세요.";
+          },
+          icon: "😢",
+          ...toastOption,
         },
-        icon: "😢",
-        ...toastOption,
-      },
-    });
+      });
+    } catch(error) {
+      toastMessage(error, toast.error);
+    }
+    
   };
 
   // 회원가입 요청(Back-end 통신)을 가정
