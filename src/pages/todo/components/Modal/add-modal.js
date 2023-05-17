@@ -4,27 +4,22 @@ import {
   flexCenter,
   modalBackGround,
 } from "../../../../styles/common";
-import { toast } from "react-toastify";
-import { toastMessage } from "../../../../components/Toast/toast-message";
 
-const TodoAddModal = () => {
-  const onClickAddModal = (e) => {
-    e.preventDefault();
-    toastMessage("TODO SUCCESS", toast.success);
-  };
-
+const TodoAddModal = ({ onAddToDo, onClose }) => {
   return (
     <S.Wrapper>
-      <S.Form>
+      <S.Form onSubmit={onAddToDo}>
         <S.Title>
           <span>ADD TODO LIST</span>
-          <button>x</button>
+          <button type="button" onClick={onClose}>
+            x
+          </button>
         </S.Title>
         <S.Content>
           <input placeholder="제목을 입력해주세요" />
           <textarea placeholder="할 일 내용을 입력해주세요"></textarea>
         </S.Content>
-        <S.Button onClick={onClickAddModal}>ADD</S.Button>
+        <S.Button>ADD</S.Button>
       </S.Form>
     </S.Wrapper>
   );

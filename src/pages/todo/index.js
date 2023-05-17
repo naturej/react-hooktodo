@@ -3,11 +3,42 @@ import BasicButton from "../../components/Button/Button";
 import { flexCenter, flexAlignCenter } from "../../styles/common";
 import TodoAddModal from "./components/Modal/add-modal";
 import TodoList from "./components/List/todo-list";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 const TodoPage = () => {
+  // 모달창 띄울건지 관리하는 state 변수
+  const [isAddTodoModal, setIsAddTodoModal] = useState(false);
+
+  const addTodo = () => {
+    return new Promise((resolve) => setTimeout(resolve, 3000));
+  };
+
+  const showTodoToastMessage = (e) => {
+    e.preventDefault();
+    toast.promise(addTodo, {
+      pending: "TODO LOADING",
+      success: "TODO SUCCESS",
+      error: "TODO ERROR",
+    });
+  };
+
+  const handelOpenTodoModal = () => {
+    setIsAddTodoModal(true);
+  };
+
+  const handelCloseTodoModal = () => {
+    setIsAddTodoModal(false);
+  };
+
   return (
     <>
-      <TodoAddModal />
+      {isAddTodoModal && (
+        <TodoAddModal
+          onAddToDo={showTodoToastMessage}
+          onClose={handelCloseTodoModal}
+        />
+      )}
       <S.Wrapper>
         <S.Container>
           <S.Title>List</S.Title>
@@ -15,7 +46,11 @@ const TodoPage = () => {
             <TodoList />
           </S.Content>
           <S.ButtonBox>
-            <BasicButton variant={"primary"} size={"full"}>
+            <BasicButton
+              variant={"primary"}
+              size={"full"}
+              onClick={handelOpenTodoModal}
+            >
               추가
             </BasicButton>
           </S.ButtonBox>
