@@ -15,7 +15,7 @@ export const PALETTE = {
     100: "#e9e9e9",
     200: "#d1d1d1",
     300: "#bababa",
-    400: "#a3a3a3"
+    400: "#a3a3a3",
   },
 };
 
@@ -42,6 +42,11 @@ const theme = {
   FONT_SIZE,
   FONT_WEIGHT,
   FONT_LINE,
+};
+
+export const toastOption = {
+  autoClose: 2000,
+  theme: "colored",
 };
 
 export default theme;

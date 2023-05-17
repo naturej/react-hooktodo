@@ -16,8 +16,11 @@ const TodoAddModal = ({ onAddToDo, onClose }) => {
           </button>
         </S.Title>
         <S.Content>
-          <input placeholder="제목을 입력해주세요" />
-          <textarea placeholder="할 일 내용을 입력해주세요"></textarea>
+          <input name="title" placeholder="제목을 입력해주세요" />
+          <textarea
+            name="content"
+            placeholder="할 일 내용을 입력해주세요"
+          ></textarea>
         </S.Content>
         <S.Button>ADD</S.Button>
       </S.Form>
