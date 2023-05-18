@@ -40,7 +40,7 @@ const TodoPage = () => {
           content,
         };
         resolve(newTodo);
-      }, 3000)
+      }, 1000)
     ).then((todo) => {
       setTodoList([todo, ...todoList]);
       setIsAddTodoModal(false);
