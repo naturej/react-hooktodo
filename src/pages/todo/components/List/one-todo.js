@@ -10,10 +10,11 @@ const OneTodo = ({ todo, updateTodo, deleteTodo }) => {
   const [isEditMode, setIsEditMode] = useState(false);
 
   const [editContent, onChangeEditContent] = useInput(content);
+  const [editTitle, onChangeEditTitle] = useInput(title);
 
   const handleTodoEdit = () => {
     if (!isEditMode) return setIsEditMode(true);
-    updateTodo(id, editContent);
+    updateTodo(id, editTitle, editContent);
     setIsEditMode(false);
   };
 
@@ -21,7 +22,6 @@ const OneTodo = ({ todo, updateTodo, deleteTodo }) => {
     deleteTodo(id);
   };
 
-  //TODO: title 바꾸기
   //TODO: Wrapper 대신 Form으로 바꾸기
   //TODO: 체크 수정 구현하기
   return (
@@ -31,7 +31,11 @@ const OneTodo = ({ todo, updateTodo, deleteTodo }) => {
           <FontAwesomeIcon icon={faCheck} />
         </S.StateBox>
         <S.Title state={state}>
-          {title}
+          {isEditMode ? (
+            <textarea value={editTitle} onChange={onChangeEditTitle}></textarea>
+          ) : (
+            title
+          )}
           <div>
             <FontAwesomeIcon icon={faPen} onClick={handleTodoEdit} />
             <FontAwesomeIcon icon={faBan} onClick={handleTodoDelete} />
