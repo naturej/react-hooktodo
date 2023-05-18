@@ -79,7 +79,7 @@ const TodoPage = () => {
         <S.Container>
           <S.Title>List</S.Title>
           <S.Content>
-            <TodoList todoList={todoList} />
+            <TodoList todoList={todoList} setTodoList={setTodoList} />
           </S.Content>
           <S.ButtonBox>
             <BasicButton

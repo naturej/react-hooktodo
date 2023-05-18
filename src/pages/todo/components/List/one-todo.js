@@ -2,9 +2,23 @@ import styled from "styled-components";
 import { flexAlignCenter, flexCenter } from "../../../../styles/common";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faPen, faBan } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
+import useInput from "../../../../hooks/use-input";
 
-const OneTodo = ({ todo }) => {
-  const { state, title, content } = todo;
+const OneTodo = ({ todo, updateTodo }) => {
+  const { id, state, title, content } = todo;
+  const [isEditMode, setIsEditMode] = useState(false);
+
+  const [editContent, onChangeEditContent] = useInput(content);
+
+  const handleTodoEdit = () => {
+    if (!isEditMode) return setIsEditMode(true);
+    updateTodo(id, editContent);
+    setIsEditMode(false);
+  };
+
+  //TODO: title 바꾸기
+  //TODO: Wrapper 대신 Form으로 바꾸기
   return (
     <S.Wrapper state={state}>
       <S.Header>
@@ -14,12 +28,21 @@ const OneTodo = ({ todo }) => {
         <S.Title state={state}>
           {title}
           <div>
-            <FontAwesomeIcon icon={faPen} />
+            <FontAwesomeIcon icon={faPen} onClick={handleTodoEdit} />
             <FontAwesomeIcon icon={faBan} />
           </div>
         </S.Title>
       </S.Header>
-      <S.Content state={state}>{content}</S.Content>
+      <S.Content state={state}>
+        {isEditMode ? (
+          <textarea
+            value={editContent}
+            onChange={onChangeEditContent}
+          ></textarea>
+        ) : (
+          content
+        )}
+      </S.Content>
     </S.Wrapper>
   );
 };
