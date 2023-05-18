@@ -1,4 +1,3 @@
-import { useState } from "react";
 import OneTodo from "./one-todo";
 
 const TodoList = ({ todoList, setTodoList }) => {
@@ -20,7 +19,13 @@ const TodoList = ({ todoList, setTodoList }) => {
   return (
     <>
       {todoList.map((todo) => (
-        <OneTodo todo={todo} updateTodo={updateTodo} deleteTodo={deleteTodo} />
+        <OneTodo
+          key={todo.id}
+          todo={todo}
+          updateTodo={updateTodo}
+          deleteTodo={deleteTodo}
+          editContent={todo.content}
+        />
       ))}
     </>
   );
