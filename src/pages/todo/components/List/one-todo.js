@@ -5,7 +5,7 @@ import { faCheck, faPen, faBan } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import useInput from "../../../../hooks/use-input";
 
-const OneTodo = ({ todo, updateTodo, deleteTodo }) => {
+const OneTodo = ({ todo, updateTodo, deleteTodo, completeTodo }) => {
   const { id, state, title, content } = todo;
   const [isEditMode, setIsEditMode] = useState(false);
 
@@ -22,13 +22,16 @@ const OneTodo = ({ todo, updateTodo, deleteTodo }) => {
     deleteTodo(id);
   };
 
+  const handleTodoComplete = () => {
+    completeTodo(id, state);
+  };
+
   //TODO: Wrapper 대신 Form으로 바꾸기
-  //TODO: 체크 수정 구현하기
   return (
     <S.Wrapper state={state}>
       <S.Header>
         <S.StateBox state={state}>
-          <FontAwesomeIcon icon={faCheck} />
+          <FontAwesomeIcon icon={faCheck} onClick={handleTodoComplete} />
         </S.StateBox>
         <S.Title state={state}>
           {isEditMode ? (
