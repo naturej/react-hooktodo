@@ -35,7 +35,6 @@ const TodoList = ({ todoList, setTodoList }) => {
           updateTodo={updateTodo}
           deleteTodo={deleteTodo}
           completeTodo={completeTodo}
-          editContent={todo.content}
         />
       ))}
     </>

@@ -3,17 +3,19 @@ import { flexAlignCenter, flexCenter } from "../../../../styles/common";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faPen, faBan } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import useInput from "../../../../hooks/use-input";
+import { useForm } from "react-hook-form";
 
 const OneTodo = ({ todo, updateTodo, deleteTodo, completeTodo }) => {
   const { id, state, title, content } = todo;
   const [isEditMode, setIsEditMode] = useState(false);
 
-  const [editContent, onChangeEditContent] = useInput(content);
-  const [editTitle, onChangeEditTitle] = useInput(title);
+  const { register } = useForm();
 
-  const handleTodoEdit = () => {
+  const handleTodoEdit = (e) => {
+    e.preventDefault();
     if (!isEditMode) return setIsEditMode(true);
+    const editTitle = e.target.title.value;
+    const editContent = e.target.content.value;
     updateTodo(id, editTitle, editContent);
     setIsEditMode(false);
   };
@@ -26,35 +28,38 @@ const OneTodo = ({ todo, updateTodo, deleteTodo, completeTodo }) => {
     completeTodo(id, state);
   };
 
-  //TODO: Wrapper 대신 Form으로 바꾸기
   return (
     <S.Wrapper state={state}>
-      <S.Header>
-        <S.StateBox state={state}>
-          <FontAwesomeIcon icon={faCheck} onClick={handleTodoComplete} />
-        </S.StateBox>
-        <S.Title state={state}>
+      <form onSubmit={handleTodoEdit}>
+        <S.Header>
+          <S.StateBox state={state}>
+            <FontAwesomeIcon icon={faCheck} onClick={handleTodoComplete} />
+          </S.StateBox>
+          <S.Title state={state}>
+            {isEditMode ? (
+              <textarea defaultValue={title} {...register("title")}></textarea>
+            ) : (
+              title
+            )}
+            <div>
+              <S.Button>
+                <FontAwesomeIcon icon={faPen} />
+              </S.Button>
+              <FontAwesomeIcon icon={faBan} onClick={handleTodoDelete} />
+            </div>
+          </S.Title>
+        </S.Header>
+        <S.Content state={state}>
           {isEditMode ? (
-            <textarea value={editTitle} onChange={onChangeEditTitle}></textarea>
+            <textarea
+              defaultValue={content}
+              {...register("content")}
+            ></textarea>
           ) : (
-            title
+            content
           )}
-          <div>
-            <FontAwesomeIcon icon={faPen} onClick={handleTodoEdit} />
-            <FontAwesomeIcon icon={faBan} onClick={handleTodoDelete} />
-          </div>
-        </S.Title>
-      </S.Header>
-      <S.Content state={state}>
-        {isEditMode ? (
-          <textarea
-            value={editContent}
-            onChange={onChangeEditContent}
-          ></textarea>
-        ) : (
-          content
-        )}
-      </S.Content>
+        </S.Content>
+      </form>
     </S.Wrapper>
   );
 };
@@ -85,11 +90,17 @@ const Title = styled.h1`
   justify-content: space-between;
   font-weight: ${({ theme }) => theme.FONT_WEIGHT.bold};
   text-decoration: ${({ state }) => (state ? "line-through" : "none")};
-  & svg {
-    cursor: pointer;
-    margin-left: 16px;
-    :hover {
-      transform: scale(1.2);
+
+  & div {
+    ${flexCenter}
+    gap: 16px;
+
+    & svg {
+      cursor: pointer;
+
+      :hover {
+        transform: scale(1.2);
+      }
     }
   }
 `;
@@ -119,10 +130,18 @@ const Content = styled.div`
   }
 `;
 
+const Button = styled.button`
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  font-size: 1em;
+`;
+
 const S = {
   Wrapper,
   Header,
   StateBox,
   Title,
   Content,
+  Button,
 };
