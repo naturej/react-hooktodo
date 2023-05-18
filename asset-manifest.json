@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/react-hooktodo/static/css/main.bc1dca3e.css",
-    "main.js": "/react-hooktodo/static/js/main.663b11aa.js",
+    "main.js": "/react-hooktodo/static/js/main.a2f81883.js",
     "static/js/787.6715f0ab.chunk.js": "/react-hooktodo/static/js/787.6715f0ab.chunk.js",
     "index.html": "/react-hooktodo/index.html",
     "main.bc1dca3e.css.map": "/react-hooktodo/static/css/main.bc1dca3e.css.map",
-    "main.663b11aa.js.map": "/react-hooktodo/static/js/main.663b11aa.js.map",
+    "main.a2f81883.js.map": "/react-hooktodo/static/js/main.a2f81883.js.map",
     "787.6715f0ab.chunk.js.map": "/react-hooktodo/static/js/787.6715f0ab.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.bc1dca3e.css",
-    "static/js/main.663b11aa.js"
+    "static/js/main.a2f81883.js"
   ]
 }
