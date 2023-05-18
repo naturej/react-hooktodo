@@ -10,10 +10,17 @@ const TodoList = ({ todoList, setTodoList }) => {
     setTodoList(_todoList);
   };
 
+  const deleteTodo = (id) => {
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      const _todoList = todoList.filter((todo) => todo.id !== id);
+      setTodoList(_todoList);
+    }
+  };
+
   return (
     <>
       {todoList.map((todo) => (
-        <OneTodo todo={todo} updateTodo={updateTodo} />
+        <OneTodo todo={todo} updateTodo={updateTodo} deleteTodo={deleteTodo} />
       ))}
     </>
   );
