@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import BasicButton from "../../../components/Button/Button";
-import useInputs from "../../../hooks/use-inputs";
-import * as S from "./style";
 import { toast } from "react-toastify";
-import { toastMessage } from "../../../components/Toast/toast-message";
+import BasicButton from "@components/Button/Button";
+import { toastMessage } from "@components/Toast/toast-message";
+import useInputs from "@hooks/use-inputs";
+import * as S from "./style";
 
 const SignUpForm = () => {
   const [

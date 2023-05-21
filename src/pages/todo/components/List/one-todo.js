@@ -1,9 +1,9 @@
-import styled from "styled-components";
-import { flexAlignCenter, flexCenter } from "../../../../styles/common";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faPen, faBan } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faPen, faBan } from "@fortawesome/free-solid-svg-icons";
+import { flexAlignCenter, flexCenter } from "@styles/common";
 
 const OneTodo = ({ todo, updateTodo, deleteTodo, completeTodo }) => {
   const { id, state, title, content } = todo;

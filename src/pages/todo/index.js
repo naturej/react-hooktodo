@@ -1,10 +1,10 @@
+import { useState } from "react";
 import styled from "styled-components";
-import BasicButton from "../../components/Button/Button";
-import { flexCenter, flexAlignCenter } from "../../styles/common";
+import { toast } from "react-toastify";
+import BasicButton from "@components/Button/Button";
+import { flexAlignCenter, flexCenter } from "@styles/common";
 import TodoAddModal from "./components/Modal/add-modal";
 import TodoList from "./components/List/todo-list";
-import { useState } from "react";
-import { toast } from "react-toastify";
 
 const TodoPage = () => {
   // 모달창 띄울건지 관리하는 state 변수

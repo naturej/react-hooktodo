@@ -1,8 +1,9 @@
+import { useState } from "react";
 import styled from "styled-components";
+import { flexCenter } from "@styles/common";
 import SignInForm from "./components/Signin";
 import SignUpForm from "./components/Signup";
-import { flexCenter } from "../../styles/common";
-import { useState } from "react";
+
 const MainPage = () => {
   const [isFormLogin, setIsFormLogin] = useState(true);
 

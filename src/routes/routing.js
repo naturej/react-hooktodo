@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
-import MainPage from "../pages/main";
-import TodoPage from "../pages/todo";
-import Layout from "../components/Layout";
-import ReactHookForm from "../pages/reactHookForm";
+import MainPage from "@pages/main";
+import TodoPage from "@pages/todo";
+import Layout from "@components/Layout";
+import ReactHookForm from "@pages/reactHookForm";
 
 const router = createBrowserRouter(
   [

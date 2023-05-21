@@ -1,8 +1,8 @@
 import { useState } from "react";
+import styled from "styled-components";
+import { flexCenter } from "@styles/common";
 import SignInForm from "./components/Signin";
 import SignUpForm from "./components/Signup";
-import styled from "styled-components";
-import { flexCenter } from "../../styles/common";
 
 const ReactHookForm = () => {
   const [isFormLogin, setIsFormLogin] = useState(true);

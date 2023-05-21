@@ -1,8 +1,8 @@
-import BasicButton from "../../../components/Button/Button";
-import * as S from "../../main/components/style";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { toastMessage } from "../../../components/Toast/toast-message";
+import BasicButton from "@components/Button/Button";
+import { toastMessage } from "@components/Toast/toast-message";
+import * as S from "@pages/main/components/style";
 
 const SignInForm = () => {
   const {

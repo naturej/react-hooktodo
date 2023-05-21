@@ -1,5 +1,5 @@
+import { flexCenter } from "@styles/common";
 import styled from "styled-components";
-import { flexCenter } from "../../../styles/common";
 
 export const Form = styled.form`
   width: 360px;

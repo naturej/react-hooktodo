@@ -1,9 +1,5 @@
 import styled from "styled-components";
-import {
-  flexAlignCenter,
-  flexCenter,
-  modalBackGround,
-} from "../../../../styles/common";
+import { flexAlignCenter, flexCenter, modalBackGround } from "@styles/common";
 
 const TodoAddModal = ({ onAddToDo, onClose }) => {
   return (
