@@ -2,9 +2,10 @@ import styled from "styled-components";
 import { flexAlignCenter, flexCenter, modalBackGround } from "@styles/common";
 import { useTodoStore } from "context/todo";
 import { toast } from "react-toastify";
+import { actionType } from "consts/action";
 
 const TodoAddModal = ({ onClose, setIsAddTodoModal }) => {
-  const [todoList, setTodoList] = useTodoStore();
+  const [todoList, dispatch] = useTodoStore();
 
   const addTodo = (title, content) => {
     return new Promise((resolve) =>
@@ -18,7 +19,10 @@ const TodoAddModal = ({ onClose, setIsAddTodoModal }) => {
         resolve(newTodo);
       }, 1000)
     ).then((todo) => {
-      setTodoList([todo, ...todoList]);
+      dispatch({
+        type: actionType.ADD_TODO,
+        payload: todo,
+      });
       setIsAddTodoModal(false);
     });
   };
