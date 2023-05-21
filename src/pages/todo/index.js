@@ -9,55 +9,6 @@ import TodoList from "./components/List/todo-list";
 const TodoPage = () => {
   // 모달창 띄울건지 관리하는 state 변수
   const [isAddTodoModal, setIsAddTodoModal] = useState(false);
-  const [todoList, setTodoList] = useState([
-    {
-      id: 1,
-      title: "example1",
-      content: "content1",
-      state: false,
-    },
-    {
-      id: 2,
-      title: "example2",
-      content: "content2",
-      state: false,
-    },
-    {
-      id: 3,
-      title: "example3",
-      content: "content3",
-      state: false,
-    },
-  ]);
-
-  const addTodo = (title, content) => {
-    return new Promise((resolve) =>
-      setTimeout(() => {
-        const newTodo = {
-          id: Math.floor(Math.random() * 100000),
-          state: false,
-          title,
-          content,
-        };
-        resolve(newTodo);
-      }, 1000)
-    ).then((todo) => {
-      setTodoList([todo, ...todoList]);
-      setIsAddTodoModal(false);
-    });
-  };
-
-  const showTodoToastMessage = (e) => {
-    e.preventDefault();
-    const title = e.target.title.value;
-    const content = e.target.content.value;
-
-    toast.promise(addTodo(title, content), {
-      pending: "TODO LOADING",
-      success: "TODO SUCCESS",
-      error: "TODO ERROR",
-    });
-  };
 
   const handelOpenTodoModal = () => {
     setIsAddTodoModal(true);
@@ -71,15 +22,15 @@ const TodoPage = () => {
     <>
       {isAddTodoModal && (
         <TodoAddModal
-          onAddToDo={showTodoToastMessage}
           onClose={handelCloseTodoModal}
+          setIsAddTodoModal={setIsAddTodoModal}
         />
       )}
       <S.Wrapper>
         <S.Container>
           <S.Title>List</S.Title>
           <S.Content>
-            <TodoList todoList={todoList} setTodoList={setTodoList} />
+            <TodoList />
           </S.Content>
           <S.ButtonBox>
             <BasicButton

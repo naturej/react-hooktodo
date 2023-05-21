@@ -5,14 +5,17 @@ import theme, { toastOption } from "./styles/theme";
 import GlobalStyles from "./styles/global";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import TodoStoreProvider from "context/todo";
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      <RouterProvider router={router} />
-      <ToastContainer {...toastOption} />
-    </ThemeProvider>
+    <TodoStoreProvider>
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        <RouterProvider router={router} />
+        <ToastContainer {...toastOption} />
+      </ThemeProvider>
+    </TodoStoreProvider>
   );
 }
 

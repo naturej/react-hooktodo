@@ -1,7 +1,40 @@
 import styled from "styled-components";
 import { flexAlignCenter, flexCenter, modalBackGround } from "@styles/common";
+import { useTodoStore } from "context/todo";
+import { toast } from "react-toastify";
 
-const TodoAddModal = ({ onAddToDo, onClose }) => {
+const TodoAddModal = ({ onClose, setIsAddTodoModal }) => {
+  const [todoList, setTodoList] = useTodoStore();
+
+  const addTodo = (title, content) => {
+    return new Promise((resolve) =>
+      setTimeout(() => {
+        const newTodo = {
+          id: Math.floor(Math.random() * 100000),
+          state: false,
+          title,
+          content,
+        };
+        resolve(newTodo);
+      }, 1000)
+    ).then((todo) => {
+      setTodoList([todo, ...todoList]);
+      setIsAddTodoModal(false);
+    });
+  };
+
+  const onAddToDo = (e) => {
+    e.preventDefault();
+    const title = e.target.title.value;
+    const content = e.target.content.value;
+
+    toast.promise(addTodo(title, content), {
+      pending: "TODO LOADING",
+      success: "TODO SUCCESS",
+      error: "TODO ERROR",
+    });
+  };
+
   return (
     <S.Wrapper>
       <S.Form onSubmit={onAddToDo}>

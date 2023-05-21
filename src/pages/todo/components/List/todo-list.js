@@ -1,6 +1,9 @@
+import { useTodoStore } from "context/todo";
 import OneTodo from "./one-todo";
 
-const TodoList = ({ todoList, setTodoList }) => {
+const TodoList = () => {
+  const [todoList, setTodoList] = useTodoStore();
+
   // 수정
   const updateTodo = (id, title, content) => {
     const _todoList = [...todoList];
