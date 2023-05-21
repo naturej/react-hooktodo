@@ -1,4 +1,5 @@
 import { actionType } from "consts/action";
+import { createAction } from "utils/createAction";
 
 const { createContext, useContext, useReducer } = require("react");
 
@@ -26,6 +27,11 @@ const initialValue = [
 export const useTodoStore = () => useContext(TodoStore);
 
 const TodoStore = createContext();
+
+export const ADD_TODO = createAction(actionType.ADD_TODO);
+export const DELETE_TODO = createAction(actionType.DELETE_TODO);
+export const UPDATE_TODO = createAction(actionType.UPDATE_TODO);
+export const COMPLETE_TODO = createAction(actionType.COMPLETE_TODO);
 
 const todoReducer = (state, action) => {
   switch (action.type) {

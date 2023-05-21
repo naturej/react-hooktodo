@@ -4,8 +4,12 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faPen, faBan } from "@fortawesome/free-solid-svg-icons";
 import { flexAlignCenter, flexCenter } from "@styles/common";
-import { useTodoStore } from "context/todo";
-import { actionType } from "consts/action";
+import {
+  COMPLETE_TODO,
+  DELETE_TODO,
+  UPDATE_TODO,
+  useTodoStore,
+} from "context/todo";
 
 const OneTodo = ({ todo }) => {
   const [todoList, dispatch] = useTodoStore();
@@ -20,33 +24,20 @@ const OneTodo = ({ todo }) => {
     if (!isEditMode) return setIsEditMode(true);
     const editTitle = e.target.title.value;
     const editContent = e.target.content.value;
-    dispatch({
-      type: actionType.UPDATE_TODO,
-      payload: {
-        id: id,
-        title: editTitle,
-        content: editContent,
-      },
-    });
+    dispatch(UPDATE_TODO({ id: id, title: editTitle, content: editContent }));
     setIsEditMode(false);
   };
 
   // 삭제
   const handleTodoDelete = () => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
-      dispatch({
-        type: actionType.DELETE_TODO,
-        payload: id,
-      });
+      dispatch(DELETE_TODO(id));
     }
   };
 
   // 완료
   const handleTodoComplete = () => {
-    dispatch({
-      type: actionType.COMPLETE_TODO,
-      payload: id,
-    });
+    dispatch(COMPLETE_TODO(id));
   };
 
   return (

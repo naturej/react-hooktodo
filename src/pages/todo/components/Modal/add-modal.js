@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { flexAlignCenter, flexCenter, modalBackGround } from "@styles/common";
-import { useTodoStore } from "context/todo";
+import { ADD_TODO, useTodoStore } from "context/todo";
 import { toast } from "react-toastify";
-import { actionType } from "consts/action";
 
 const TodoAddModal = ({ onClose, setIsAddTodoModal }) => {
   const [todoList, dispatch] = useTodoStore();
@@ -19,10 +18,7 @@ const TodoAddModal = ({ onClose, setIsAddTodoModal }) => {
         resolve(newTodo);
       }, 1000)
     ).then((todo) => {
-      dispatch({
-        type: actionType.ADD_TODO,
-        payload: todo,
-      });
+      dispatch(ADD_TODO(todo));
       setIsAddTodoModal(false);
     });
   };
